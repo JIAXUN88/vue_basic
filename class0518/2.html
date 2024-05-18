@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>123</div>
+    <script>
+        function add(num1, num2){
+            return num1 + num2
+        }
+        const res = add(100, 20)
+        console.log(res);
+
+        const addRes = (num1, num2) =>{
+            return num1 + num2
+        }
+        console.log(addRes(200, 3));
+
+        const name =(na, bl) =>{
+            return `我是${na}，我的血型是${bl}`
+            
+        }
+        console.log(name("John", "A"));
+
+        const name2 =(na, bl) =>`我是${na}，我的血型是${bl}`
+        console.log(name2("Ann", "O"));
+    </script>
+    
+</body>
+</html>
