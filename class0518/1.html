@@ -6,6 +6,43 @@
     <title>Test</title>
 </head>
 <body>
-    
+    <div id="app">
+        <!-- 寫入模板字的寫法，第一個比較常用。 -->
+        <p>Hello {{name}}，來到這個網站</p>
+
+        <!-- 布林一般寫法 (要用兩個{}) -->
+        <p>{{live? "活著": "死掉了"}}</p> 
+
+        <!-- 陣列寫法 -->
+        <p>{{name}}，要去聽{{music[1]}}</p>
+
+        <!-- 物件寫法，若只寫["f2e"]會顯示所有資料['vue','react'] -->
+        <p>{{name}}，會用{{skill["f2e"][0]}}</p>
+
+        <!-- <p v-text="`${age}歲`"></p>
+        <h6 v-html="content"></h6> -->
+    </div>
+    <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.js"></script>
+
+    <script>
+        // console.log(Vue)
+        const app = Vue.createApp({
+            data() {
+                return {
+                    name: 'ingrid',
+                    age: 20,
+                    live: true,
+                    music:['aimar','one ok rock','mamamoo'],
+                    skill:{
+                        f2e:['vue','react'],
+                        b2e:['AAA','BBB','CCC']
+                    },
+                    gender: null,
+                    content: '<div style="color: red">嘿嘿</div>'
+                }
+            },
+        })
+        app.mount('#app')
+    </script>
 </body>
 </html>
