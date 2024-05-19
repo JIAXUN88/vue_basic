@@ -11,8 +11,10 @@
         {{res}}
         <button @click="add">+1</button>
         <br>
-        總價：{{ parse() }}
-        <!-- 美金：{{ parseDollar() }} -->
+        <!-- 總價：{{ parse() }} 若將parse寫在 computed:裡面，就用下面的寫法 -->
+        總價：{{ parse}}
+        美金：{{ dollar }}
+
     </div>
     
 
@@ -24,7 +26,15 @@
                     res: 0,
                     count: 1,
                     price: 100,
-                    // dollar: 0
+                }
+            },
+            computed: {
+                parse(){
+                    return this.price * this.res
+                },
+                dollar() {
+                    // return (this.price * this.res)/30
+                    return this.parse/30
                 }
             },
             methods: {
@@ -38,14 +48,9 @@
                     if(this.res == 0) return
                     this.res -= this.count
                 },
-                parse(){
-                    console.log('abcdef');
-                    return this.price * this.res
-                },
-                // parseDollar(){
-                //     console.log('ABCDEF');
-                //     return this.price * 30
-                // }
+                // parse(){
+                //     return this.price * this.res
+                // },
             },
         }).mount("#app")
     </script>

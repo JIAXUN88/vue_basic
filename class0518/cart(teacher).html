@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
         * {
@@ -34,6 +34,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
+
         }
 
         img {
@@ -45,49 +46,38 @@
         button {
             width: 2rem;
             height: 2rem;
-            border-radius: 50%;
+            border-radius: 20%;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <!-- <p v-for="number in 10">{{number}}</p>  寫頁碼可以用到 -->
+        <!-- <p v-for="number in 10" clas="page">{{number}}</p> -->
         <div class="cart">
             <h5>shopping cart</h5>
 
-            <div class="cartItem" v-for="(carItem, cartIndex) in cartList">
-                <img :src="cartList[cartIndex]['img']" alt="" />
+            <div class="cartItem" v-for="(cartItem, cartIndex) in cartList" :key="cartItem['id']">
+                <img :src="cartItem['img']" alt="">
                 <div>
-                    <h6>{{cartList[cartIndex]['title']}}</h6>
-                    <p>{{cartList[cartIndex]['subTitle']}}</p>
-                    <p>＄{{cartList[cartIndex]['price']}}</p>
+                    <h3>{{cartItem['title']}}</h3>
+                    <p>{{cartItem['subTitle']}}</p>
+                    <p>＄{{cartItem['price']}}</p>
                 </div>
                 <div>
                     <button @click="reduce(cartIndex)">-</button>
-                    {{cartList[cartIndex]['count']}}
+                    {{cartItem['count']}}
                     <button @click="add(cartIndex)">+</button>
                 </div>
                 <button>X</button>
-            </div>
-            <div class="cartItem">
-                <img :src="cartList[1]['img']" alt="" />
-                <div>
-                    <h6>{{cartList[1]['title']}}</h6>
-                    <p>{{cartList[1]['subTitle']}}</p>
-                    <p>＄{{cartList[1]['price']}}</p>
                 </div>
                 <div>
-                    <button @click="reduce(1)">-</button>
-                    {{cartList[1]['count']}}
-                    <button @click="add(1)">+</button>
+                    Total: $ {{total}}
                 </div>
-                <button>X</button>
             </div>
-        </div>
         <!-- <div class="form"></div> -->
     </div>
-    <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue"></script>
     <script>
         Vue.createApp({
             data() {
@@ -95,33 +85,51 @@
                     cartList: [
                         {
                             id: 1,
-                            title: "aaa",
-                            subTitle: "bbb",
-                            price: 100,
+                            title: '兔兔',
+                            subTitle: '白色',
+                            price: 200,
                             count: 1,
-                            img: "/images/rabbit.png",
+                            img: "/images/rabbit.png"
                         },
                         {
                             id: 2,
-                            title: "ccc",
-                            subTitle: "ddd",
-                            price: 200,
-                            count: 2,
-                            img: "/images/dog.png",
+                            title: '烏龜',
+                            subTitle: '綠色',
+                            price: 300,
+                            count: 1,
+                            img: "/images/turtle.png"
                         },
-                    ],
-                };
+                    ]
+                }
+            },
+            computed: {
+                total() {
+                    // 想法
+                    // const prod1 = this.cartList[0]['price'] * this.cartList[0]['count']
+                    // const prod2 = this.cartList[1]['price'] * this.cartList[1]['count']
+                    // return prod1 + prod2
+
+                    // for迴圈
+                    // let price = 0
+                    // for (let index = 0; index < this.cartList.length; index++) {
+                    //   price += (this.cartList[index]['price'] * this.cartList[index]['count'])        
+                    // }
+                    // return price
+
+                    // Array.reduce
+                    return this.cartList.reduce((total, item) => total + item.price * item.count, 0);
+                }
             },
             methods: {
                 add(index) {
-                    this.cartList[index]["count"] += 1;
+                    this.cartList[index]['count'] += 1
                 },
                 reduce(index) {
-                    if (this.cartList[index]["count"] == 0) return;
-                    this.cartList[index]["count"] -= 1;
+                    if (this.cartList[index]['count'] == 0) return
+                    this.cartList[index]['count'] -= 1
                 },
             },
-        }).mount("#app");
+        }).mount("#app")
     </script>
 </body>
 
