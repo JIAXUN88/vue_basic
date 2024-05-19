@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card{
+            width: 1000px;
+            background-color: #aaa;
+            display: flex;
+        }
+        .txt{
+            display: flex;
+        }
+        .txt .count{
+            display: flex;
+        }
+        .txt .count button{
+            width: 100px;
+            height: 20%;
+        }
+        .pic img{
+            width: 10rem;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <div class="row">
+            <!-- 可將下方陣列資料加入進來，寫法為{{cartList[0]['title']}} -->
+            <h2>Shopping</h2> 
+            <!-- 下面的class老師是cartItem -->
+            <div class="card">
+                <div class="pic">
+                    <img :src="cartList[0]['img']" alt="">
+                </div>
+                <div class="txt">
+                    <div class="name">
+                <p>rabbit</p>                
+                </div>
+                <div class="count">
+                    <button @click="reduce()">-</button>
+                    <!-- 改成這種寫法 -->
+                    {{cartList[0]['count']}} 
+                    <!-- <p>0</p> -->
+                    <button @click="add()">+</button>
+                </div>
+                <div class="price">
+                    <p>總價</p>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    cartlist: [
+                        {
+                            id: 1,
+                            name: 'aaa',
+                            subTitle :'bbb',
+                            price: 100,
+                            count: 1,
+                            img: "../images/rabbit.png"
+                        },
+                        {
+                            id: 2,
+                            name: 'ccc',
+                            subTitle :'ddd',
+                            price: 200,
+                            count: 2,
+                            img: "../images/turrle.png"
+                        }
+                    ]
+                    
+                }
+            },
+            methods: {
+                add(index){
+                    this.card[index]['count'] +=1
+                },
+                reduce(index){
+                    if(this.card[index]['count'] == 0) return
+                    this.card[index]['count'] -= 1
+                }
+            },
+        }).mount("#app")
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="app">
+        <!-- <img src="/images/turtle.png" alt=""> -->
+        <!-- <img :src="imgUrl" style="width: 6rem;" alt=""> -->
+        <img :src="imgUrl" :style="{
+            width: `${widths}rem`,
+            backgroundColor: bg,
+            padding: '0.5rem'
+        }" alt="">
+        <button @click="addw">加大圖片</button>
+    </div>
+    
+
+    <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    imgUrl: "/images/turtle.png",
+                    bg: '#999', //string
+                    widths: 0 //number
+                    
+                }
+            },
+            methods: {
+                addw(){
+                    if(this.widths == 9) return
+                    //每次按下去就加大圖片
+                    this.widths += 1
+                    //延伸：每次按下去改底色 (記得要加#符號)
+                    this.bg = `#${this.widths}${this.widths}${this.widths}`
+                    
+                    }
+            },
+        }).mount("#app")
+    </script>
+
+</body>
+</html>
